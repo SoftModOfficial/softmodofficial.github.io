@@ -17,7 +17,6 @@
     .header {
       padding: 10px;
       background-color: #333;
-      position: fixed;
       width: 100%;
       z-index: 1000;
     }
@@ -44,6 +43,11 @@
     .menu li a:hover {
       background-color: #111;
     }
+    .menu-wrapper {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
     @media screen and (max-width: 768px) {
       .menu li {
         display: none;
@@ -64,6 +68,8 @@
 <body>
   <div class="header">
     <span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
+  </div>
+  <div class="menu-wrapper">
     <ul class="menu" id="menu">
       <li><a href="https://coresageinnovations.github.io/index.html">Home</a></li>
       <li><a href="https://coresageinnovations.github.io/minecraftservermobile.html">CoreSage Minecraft Server Info</a></li>
