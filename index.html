@@ -1,30 +1,58 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-  <title>Home - CoreSage Innovations</title>
-  <meta name="generator" content="Amaya, see http://www.w3.org/Amaya/" />
-  <link rel="shortcut icon" type="image/x-icon" href="CoreSageLogo.ico">
-  <script>
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-      window.location = "https://coresageinnovations.github.io/mobile.html";
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Redirect Page</title>
+<script>
+  // Function to check if the device is a mobile device
+  function isMobile() {
+    return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  }
+
+  // Function to fetch the content of the text file
+  function fetchTextFile() {
+    var textFileURL = "maintenance.txt"; // Replace with the URL of your text file
+    return fetch(textFileURL)
+      .then(response => response.text())
+      .catch(error => {
+        console.error('Error fetching text file:', error);
+        return "1"; // Return 1 in case of error (assuming 1 means regular mode)
+      });
+  }
+
+  // Function to redirect the user based on the device and content of the text file
+  function redirectUser(isMobileDevice, textFileContent) {
+    var regularPage = isMobileDevice ? "mobile.html" : "desktop.html";
+    var maintenancePage = isMobileDevice ? "maintenancemobile.html" : "maintenance.html";
+
+    if (textFileContent.trim() === "0") {
+      window.location.href = maintenancePage;
+    } else {
+      window.location.href = regularPage;
     }
-  </script>
+  }
+
+  // Check if the device is mobile and then redirect accordingly
+  function checkDeviceAndRedirect() {
+    var isMobileDevice = isMobile();
+    if (isMobileDevice) {
+      fetchTextFile().then(textFileContent => {
+        redirectUser(isMobileDevice, textFileContent);
+      });
+    } else {
+      // For non-mobile devices, directly redirect based on the content of the text file
+      fetchTextFile().then(textFileContent => {
+        redirectUser(isMobileDevice, textFileContent);
+      });
+    }
+  }
+
+  // Call the function to check device and redirect
+  checkDeviceAndRedirect();
+</script>
 </head>
-
-<body style="background-color:black;">
-<img src="CoreSage Discord Icon.png" alt="Your Image" style="display: block; margin: 0 auto; width: 128px; height: 128px;" />
-<h3 style="font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; color: white; text-align: center;"><a style="font-size: 22pt; color: white; " href="https://coresageinnovations.github.io/index.html">Home</a></h3>
-<p></p>
-<p></p>
-<h1 style="font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; color: white; ">Welcome To CoreSage Innovations</h1>
-
-<h3><a style="font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; color: white; " href="https://coresageinnovations.github.io/addmore/index.html">AddMore (Formerly TAM)</a></h3>
-<h3><a style="font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; color: white; " href="https://coresageinnovations.github.io/minecraftserver.html">CoreSage Minecraft Server Info</a></h3>
-<h3><a style="font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; color: white; " href="https://coresageinnovations.github.io/coresageutility/index.html">CoreSage Utility (SoftMod Utility)</a></h3>
-<h1> </h1>
-<h1> </h1>
+<body>
+  <!-- You can add a loading message or spinner here if needed -->
 </body>
 </html>
